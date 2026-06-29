@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>50 sq km Urban Design Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="viewport" aria-label="Parametric urban design viewport">
+        <canvas id="cityCanvas" width="1400" height="900"></canvas>
+        <div class="view-toolbar" aria-label="View controls">
+          <button id="zoomOut" type="button" title="Zoom out">-</button>
+          <button id="zoomIn" type="button" title="Zoom in">+</button>
+          <button id="fitView" type="button" title="Fit full site">Fit</button>
+          <button id="panToggle" type="button" aria-pressed="false" title="Toggle pan mode">Pan</button>
+        </div>
+        <div class="site-label">
+          <strong>50 sq km study site</strong>
+          <span>7.07 km x 7.07 km curvilinear organic urban fabric</span>
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="Urban design controls">
+        <div class="panel-heading">
+          <p>Organic Urban Design</p>
+          <h1>50 sq km District</h1>
+        </div>
+
+        <div class="metric-strip" aria-label="Project metrics">
+          <div><span id="avgHeight">0 m</span><small>avg height</small></div>
+          <div><span id="totalArea">0</span><small>live GFA</small></div>
+          <div><span id="floorRatio">0.0</span><small>site FAR</small></div>
+        </div>
+        <div class="metric-strip secondary-metrics" aria-label="Additional project metrics">
+          <div><span id="buildingCount">0</span><small>buildings</small></div>
+          <div><span id="openSpaceShare">0%</span><small>open space</small></div>
+          <div><span id="siteScale">50 sq km</span><small>site size</small></div>
+        </div>
+
+        <div class="typology-list" id="typologyControls"></div>
+
+        <div class="tool-row">
+          <button id="shuffleMix" type="button" title="Shuffle the typology mix">Shuffle Mix</button>
+          <button id="resetModel" type="button" title="Regenerate the full urban design">Reset / Reorganise</button>
+        </div>
+
+        <div class="render-panel" aria-label="Photo-real render engine">
+          <strong>Nano Banana Pro render</strong>
+          <span id="renderStatus">Not connected. Add an API route to enable photorealistic rendering.</span>
+          <button id="renderPreview" type="button">Prepare Render Brief</button>
+        </div>
+
+        <div class="export-panel" aria-label="Geometry export">
+          <strong>Rhino geometry export</strong>
+          <span id="exportStatus">Exports the current site, open spaces, roads, and massing as OBJ geometry.</span>
+          <button id="exportObj" type="button">Export OBJ</button>
+        </div>
+
+        <div class="legend" id="legend"></div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

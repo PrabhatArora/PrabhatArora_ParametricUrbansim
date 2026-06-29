@@ -1,0 +1,301 @@
+﻿:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ink: #1f2428;
+  --muted: #66717d;
+  --line: #d9e0e5;
+  --paper: #ecefe8;
+  --panel: #fbfcf8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+button, input { font: inherit; }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  min-height: 100vh;
+}
+
+.viewport {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(31, 36, 40, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(31, 36, 40, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.34), transparent 32%),
+    #dce1d2;
+  background-size: 40px 40px;
+}
+
+#cityCanvas {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  cursor: default;
+  touch-action: none;
+}
+
+.viewport.is-panning #cityCanvas {
+  cursor: grab;
+}
+
+.viewport.is-dragging #cityCanvas {
+  cursor: grabbing;
+}
+
+.view-toolbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(31, 36, 40, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 12px 28px rgba(31, 36, 40, 0.1);
+}
+
+.view-toolbar button {
+  min-width: 42px;
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.view-toolbar button[aria-pressed="true"] {
+  background: #d7b85d;
+  border-color: #b2963e;
+  color: #1f2428;
+}
+
+.site-label {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(31, 36, 40, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.94);
+  box-shadow: 0 12px 32px rgba(31, 36, 40, 0.12);
+}
+
+.site-label span, .panel-heading p, small { color: var(--muted); }
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100vh;
+  padding: 24px;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: -12px 0 36px rgba(31, 36, 40, 0.08);
+}
+
+.panel-heading { display: grid; gap: 2px; }
+
+.panel-heading p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.panel-heading h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.secondary-metrics {
+  margin-top: -8px;
+}
+
+.metric-strip div {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.metric-strip span {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.metric-strip small {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.72rem;
+}
+
+.typology-list { display: grid; gap: 14px; }
+.typology-control { display: grid; gap: 8px; }
+
+.typology-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.typology-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-weight: 800;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid rgba(31, 36, 40, 0.22);
+}
+
+.height-value {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #355f9f;
+}
+
+.tool-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.render-panel,
+.export-panel {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.render-panel strong,
+.export-panel strong {
+  font-size: 0.9rem;
+}
+
+.render-panel span,
+.export-panel span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.render-panel button,
+.export-panel button {
+  min-height: 38px;
+}
+
+button {
+  min-height: 42px;
+  border: 1px solid #263238;
+  border-radius: 8px;
+  background: #263238;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+button + button {
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.view-toolbar button + button,
+.render-panel button,
+.export-panel button {
+  background: #ffffff;
+  color: var(--ink);
+}
+
+button:hover {
+  box-shadow: 0 8px 18px rgba(31, 36, 40, 0.12);
+  transform: translateY(-1px);
+}
+
+button:focus-visible, input:focus-visible {
+  outline: 3px solid #d7b85d;
+  outline-offset: 2px;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  padding-top: 2px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.legend::before {
+  content: "Typology legend";
+  grid-column: 1 / -1;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .viewport { min-height: 62vh; }
+  #cityCanvas { height: 62vh; }
+  .control-panel {
+    min-height: auto;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 520px) {
+  .control-panel { padding: 18px; }
+  .metric-strip, .tool-row, .legend { grid-template-columns: 1fr; }
+  .site-label { right: 14px; left: 14px; bottom: 14px; }
+}
