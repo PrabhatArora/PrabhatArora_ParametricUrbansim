@@ -3,29 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>50 sq km Urban Design Generator</title>
+    <title>Realtime Parametric Urbanism</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <section class="viewport" aria-label="Parametric urban design viewport">
+      <section class="viewport" aria-label="Maya-style parametric urban design viewport">
         <canvas id="cityCanvas" width="1400" height="900"></canvas>
+        <div class="viewport-chrome" aria-hidden="true">
+          <span>perspective</span>
+          <span>rhino shaded</span>
+          <span>units: meters</span>
+          <span>model scale 1:1</span>
+        </div>
         <div class="view-toolbar" aria-label="View controls">
           <button id="zoomOut" type="button" title="Zoom out">-</button>
           <button id="zoomIn" type="button" title="Zoom in">+</button>
           <button id="fitView" type="button" title="Fit full site">Fit</button>
           <button id="panToggle" type="button" aria-pressed="false" title="Toggle pan mode">Pan</button>
+          <button id="autoSpinToggle" type="button" aria-pressed="false" title="Toggle autospin">Spin</button>
         </div>
         <div class="site-label">
-          <strong>50 sq km study site</strong>
-          <span>7.07 km x 7.07 km curvilinear organic urban fabric</span>
+          <strong>48 sq km Port of NEOM coastal study</strong>
+          <span>Mapped-reference Red Sea shoreline near Duba, 27.56 N, 35.55 E</span>
+          <span>Model extents approx. 6.93 km x 6.93 km, units in meters</span>
+        </div>
+        <div class="cad-readout" aria-hidden="true">
+          <span>CPlane: World Top</span>
+          <span>Absolute tolerance: 0.01 m</span>
+          <span>Model units: meters</span>
         </div>
       </section>
 
       <aside class="control-panel" aria-label="Urban design controls">
         <div class="panel-heading">
-          <p>Organic Urban Design</p>
-          <h1>50 sq km District</h1>
+          <p>Realtime Urban Renderer</p>
+          <h1>Parametric Urbanism</h1>
         </div>
 
         <div class="metric-strip" aria-label="Project metrics">
@@ -36,7 +49,7 @@
         <div class="metric-strip secondary-metrics" aria-label="Additional project metrics">
           <div><span id="buildingCount">0</span><small>buildings</small></div>
           <div><span id="openSpaceShare">0%</span><small>open space</small></div>
-          <div><span id="siteScale">50 sq km</span><small>site size</small></div>
+          <div><span id="siteScale">48 sq km</span><small>site size</small></div>
         </div>
 
         <div class="typology-list" id="typologyControls"></div>
@@ -53,8 +66,9 @@
         </div>
 
         <div class="export-panel" aria-label="Geometry export">
-          <strong>Rhino geometry export</strong>
-          <span id="exportStatus">Exports the current site, open spaces, roads, and massing as OBJ geometry.</span>
+          <strong>Export model</strong>
+          <span id="exportStatus">Export the current massing as OBJ geometry or the active viewport as PNG.</span>
+          <button id="exportPng" type="button">Export PNG</button>
           <button id="exportObj" type="button">Export OBJ</button>
         </div>
 
